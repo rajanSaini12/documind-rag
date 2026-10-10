@@ -41,19 +41,18 @@ class HashingEmbeddings(Embeddings):
             raise ValueError("dim must be positive")
         self.dim = dim
 
-    def _bucket(self, feature: str) -> tuple[int, float]:
+    def _bucket(self, feature: str) -> int:
         digest = hashlib.md5(feature.encode("utf-8")).digest()
-        index = int.from_bytes(digest[:4], "little") % self.dim
-        sign = 1.0 if digest[4] % 2 == 0 else -1.0  # signed hashing reduces collision bias
-        return index, sign
+        return int.from_bytes(digest[:4], "little") % self.dim
 
     def _embed(self, text: str) -> list[float]:
         tokens = content_tokens(text)
         features = tokens + [f"{a}_{b}" for a, b in zip(tokens, tokens[1:], strict=False)]
         vec = np.zeros(self.dim, dtype=np.float32)
+        # Unsigned counts: a hash collision can only add spurious similarity, never cancel
+        # a genuine word match (which signed hashing can do with small dimensions).
         for feature in features:
-            index, sign = self._bucket(feature)
-            vec[index] += sign
+            vec[self._bucket(feature)] += 1.0
         norm = float(np.linalg.norm(vec))
         if norm > 0:
             vec /= norm

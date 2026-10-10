@@ -30,7 +30,7 @@ def test_similar_texts_are_closer_than_unrelated_ones():
     [
         ("How many days of paid annual leave do employees get?", 3),
         ("How long must passwords be?", 5),
-        ("What is the hotel reimbursement limit per night?", 4),
+        ("How much are hotel costs reimbursed per night?", 4),
     ],
 )
 def test_search_returns_gold_page_first(loaded_store, question, expected_page):

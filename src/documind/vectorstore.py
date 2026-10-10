@@ -96,7 +96,9 @@ class DocumentStore:
         # Chroma returns cosine *distance* in [0, 2]; cosine similarity = 1 - distance.
         # Negative similarity (opposite direction) is clamped to 0 for a clean [0, 1] score.
         results = self._chroma.similarity_search_with_score(query, k=k)
-        return [(doc, max(0.0, min(1.0, 1.0 - distance))) for doc, distance in results]
+        scored = [(doc, max(0.0, min(1.0, 1.0 - distance))) for doc, distance in results]
+        # Break score ties by chunk id so equal-scoring chunks come back in a stable order.
+        return sorted(scored, key=lambda hit: (-hit[1], hit[0].metadata["chunk_id"]))
 
     def _chunk_ids(self, doc_id: str) -> list[str]:
         return self._chroma.get(where={"doc_id": doc_id}, include=[])["ids"]
