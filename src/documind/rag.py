@@ -36,7 +36,10 @@ class RAGPipeline:
         return [(doc, score) for doc, score in hits if score >= self.min_score]
 
     def ask(self, question: str, top_k: int = 4) -> RAGAnswer:
-        hits = self.retrieve(question, top_k)
+        return self.generate(question, self.retrieve(question, top_k))
+
+    def generate(self, question: str, hits: list[tuple[Document, float]]) -> RAGAnswer:
+        """Answer from already-retrieved chunks (the evaluator calls this directly)."""
         if not hits:
             # Nothing to ground on: refuse without spending an LLM call.
             return RAGAnswer(answer=REFUSAL_MESSAGE, citations=[], refused=True)

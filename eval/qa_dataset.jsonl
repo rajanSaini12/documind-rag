@@ -1,0 +1,12 @@
+{"id": "q01", "question": "How many days of paid annual leave do full-time employees get?", "answerable": true, "reference_answer": "Full-time employees get 24 days of paid annual leave per calendar year.", "source": "handbook.pdf", "gold_pages": [3]}
+{"id": "q02", "question": "How many unused leave days can be carried over to the next year?", "answerable": true, "reference_answer": "Up to 5 unused leave days can be carried over into the next year.", "source": "handbook.pdf", "gold_pages": [3]}
+{"id": "q03", "question": "How many days per week am I allowed to work from home?", "answerable": true, "reference_answer": "Employees may work remotely up to three days per week, with manager approval.", "source": "handbook.pdf", "gold_pages": [2]}
+{"id": "q04", "question": "What is the maximum hotel cost reimbursed per night on business trips?", "answerable": true, "reference_answer": "Hotel costs are reimbursed up to INR 6,000 per night.", "source": "handbook.pdf", "gold_pages": [4]}
+{"id": "q05", "question": "What is the minimum password length?", "answerable": true, "reference_answer": "Passwords must be at least 14 characters long.", "source": "handbook.pdf", "gold_pages": [5]}
+{"id": "q06", "question": "Who founded Northwind Robotics, and in which year?", "answerable": true, "reference_answer": "It was founded in 2014 by Asha Verma and Daniel Brooks.", "source": "handbook.pdf", "gold_pages": [1]}
+{"id": "q07", "question": "How much is the yearly learning budget for each employee?", "answerable": true, "reference_answer": "Each employee has an annual learning budget of INR 50,000.", "source": "handbook.pdf", "gold_pages": [6]}
+{"id": "q08", "question": "When must a lost laptop be reported, and to whom?", "answerable": true, "reference_answer": "Lost devices must be reported to security@northwind.example within 24 hours.", "source": "handbook.pdf", "gold_pages": [5]}
+{"id": "q09", "question": "In which months do performance reviews happen?", "answerable": true, "reference_answer": "Performance reviews take place twice a year, in April and October.", "source": "handbook.pdf", "gold_pages": [6]}
+{"id": "q10", "question": "Are employees allowed to bring pets to the office?", "answerable": false}
+{"id": "q11", "question": "How large is the annual performance bonus?", "answerable": false}
+{"id": "q12", "question": "Which health insurance provider does the company use?", "answerable": false}
