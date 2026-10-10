@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package and dev dependencies
+        # The 'hf' extra (PyTorch) is not needed: tests use offline fake models.
+        run: |
+          python -m pip install --upgrade pip
+          pip install -e ".[dev]"
+
+      - name: Ruff lint
+        run: ruff check .
+
+      - name: Ruff format check
+        run: ruff format --check .
+
+      - name: Pytest (offline, no API keys)
+        env:
+          OPENAI_API_KEY: ""
+          HF_HUB_OFFLINE: "1"
+        run: pytest
+
+      - name: Offline evaluation smoke run
+        run: python scripts/evaluate.py --offline --out-dir /tmp/eval-results
